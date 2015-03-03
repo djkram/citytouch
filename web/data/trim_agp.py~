@@ -1,0 +1,26 @@
+import json
+import datetime
+
+timeseries = json.load(open('/home/cathal/Dropbox/twitter_time/data/spanish_twitter_agp_original.json'))
+new_timeseries = []
+
+KEEP = False
+start = datetime.datetime(2013, 3, 4, 4, 0, 0)
+end = datetime.datetime(2013, 3, 18, 5, 0, 0)
+for row in timeseries['timeseries']:
+  dt = datetime.datetime.fromtimestamp(row[0] / 1000)
+  if dt == start:
+    KEEP = True
+    print 'FOUND Start'
+  if dt == end:
+    KEEP = False
+    print 'FOUND End'
+  if KEEP:
+    print row
+    new_timeseries.append(row)
+timeseries['timeseries'] = new_timeseries
+timeseries['min_time'] = max([x[0] for x in new_timeseries])
+timeseries['max_time'] = max([x[0] for x in new_timeseries])
+timeseries['max_value'] = max([x[1] for x in new_timeseries])
+
+json.dump(timeseries, open('/home/cathal/Dropbox/twitter_time/data/spanish_twitter_agp.json', 'w'))

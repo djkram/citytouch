@@ -1,0 +1,23 @@
+#! /bin/bash
+# /etc/init.d/pico
+#
+case "$1" in
+  start)
+    echo "Starting pico"
+    /data/scripts/pico_server &> /var/log/pico.log &
+    ;;
+  stop)
+    echo "Stopping pico"
+    killall pico_server
+    ;;
+  restart)
+	$0 stop
+	$0 start
+	;;
+  *)
+    echo "Usage: /etc/init.d/pico {start|stop}"
+    exit 1
+    ;;
+esac
+
+exit 0

@@ -1,0 +1,36 @@
+import json
+import datetime
+import psycopg2
+
+con = psycopg2.connect(database='cathal', user='cathal') 
+cur = con.cursor()
+cur.execute('select created_at / 1000 from spanish_twitter order by created_at')
+data = cur.fetchall()
+
+# Remove the minutes and seconds from first.
+first = datetime.datetime.fromtimestamp(int(data[0][0]))
+first -= datetime.timedelta(minutes=first.minute)
+first -= datetime.timedelta(seconds=first.second)
+
+# Remove the minutes and seconds from last, then add one hour.
+last = datetime.datetime.fromtimestamp(int(data[-1][0]))
+last -= datetime.timedelta(minutes=last.minute)
+last -= datetime.timedelta(seconds=last.second)
+last += datetime.timedelta(hours=1)
+
+# Build up buckets by hour.
+hours = {}
+time = first
+while time <= last:
+  hours[time] = 0
+  time += datetime.timedelta(hours=1)
+
+for d in data:
+  t = datetime.datetime.fromtimestamp(d[0])
+  t -= datetime.timedelta(minutes=t.minute)
+  t -= datetime.timedelta(seconds=t.second)
+  hours[t] += 1
+
+timeseries = [[int(x.strftime('%s'))*1000, hours[x]] for x in sorted(hours.keys())]
+timeseries = filter(lambda x: x[0] >= int(datetime.datetime(2012, 8, 6, 04).strftime('%s')) * 1000, timeseries)
+json.dump({'timeseries': timeseries, 'min_time': int(datetime.datetime(2012, 8, 6, 04).strftime('%s')) * 1000, 'max_time': timeseries[-1][0]}, open('spanish_twitter.json', 'w'))

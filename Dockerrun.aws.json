@@ -1,0 +1,11 @@
+{
+    "AWSEBDockerrunVersion": "1",
+    "Image": {
+        "Name": "ubuntu:trusty"
+    },
+    "Ports": [
+        { 
+            "ContainerPort": "80"
+        }
+    ]
+}
