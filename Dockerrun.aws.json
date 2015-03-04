@@ -1,5 +1,6 @@
 {
     "AWSEBDockerrunVersion": "1",
+    "Logging": "/tmp/citytouch-logs",
     "Image": {
         "Name": "ubuntu:trusty"
     },

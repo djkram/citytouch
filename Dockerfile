@@ -22,16 +22,13 @@ RUN apt-get install -y binutils libproj-dev gdal-bin
 VOLUME ["/app"]
 ADD setup-env /app/setup-env
 
-WORKDIR /app
-
 # Setup Pico
 RUN pip install psycopg2 django greenlet gensim scikit-learn pico
-RUN wget --quiet --no-check-certificate https://github.com/surfly/gevent/archive/1.0rc2.tar.gz
-RUN tar -xf 1.0rc2.tar.gz
-RUN cd gevent-1.0rc2
-RUN python setup.py build
-RUN python setup.py install
-RUN /bin/cp setup-env/pico /etc/init.d/pico
+RUN cd /tmp && wget --quiet --no-check-certificate https://github.com/surfly/gevent/archive/1.0rc2.tar.gz &&\
+	tar -xf 1.0rc2.tar.gz && cd gevent-1.0rc2 &&\
+	python setup.py build && python setup.py install
+WORKDIR /app
+COPY setup-env/pico /etc/init.d/pico
 RUN chmod +x /etc/init.d/pico
 RUN chmod +x /app/setup-env/pico_server
 RUN update-rc.d pico defaults
@@ -48,9 +45,7 @@ RUN echo "ProxyPassReverse /pico/ http://localhost:8800/pico/" >> /etc/apache2/c
 RUN a2enconf proxy.conf
 RUN a2enmod proxy_http
 
-# Start with supervisor
-COPY /app/setup-env/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
 EXPOSE 80
 
-CMD ["/usr/bin/supervisord"]
+RUN chmod +x /app/setup-env/start-citytouch.sh
+ENTRYPOINT ["/app/setup-env/start-citytouch.sh"]

@@ -1,5 +1,6 @@
 #!/bin/bash
 
 # starts sercices
-service pico restart
-service apache2 restart 
+echo "Starting Citytouch Demo..."
+service pico start
+service apache2 start 
