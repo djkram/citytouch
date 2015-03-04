@@ -34,7 +34,6 @@ ADD setup-env /app/setup-env
 WORKDIR /app
 COPY setup-env/pico /etc/init.d/pico
 RUN chmod +x /etc/init.d/pico
-RUN chmod +x /app/setup-env/pico_server
 RUN update-rc.d pico defaults
 
 # add web
@@ -49,5 +48,6 @@ RUN a2enmod proxy_http
 
 EXPOSE 80
 
-RUN chmod +x /app/setup-env/start-citytouch.sh
+RUN chmod 0755 setup-env/pico-server
+RUN chmod 0755 setup-env/start-citytouch.sh
 ENTRYPOINT ["/app/setup-env/start-citytouch.sh"]

@@ -4,11 +4,11 @@
 case "$1" in
   start)
     echo "Starting pico"
-    /data/scripts/pico_server &> /var/log/pico.log &
+    /app/setup-env/pico-server &> /var/log/citytouch.log &
     ;;
   stop)
     echo "Stopping pico"
-    killall pico_server
+    killall pico-server
     ;;
   restart)
 	$0 stop
