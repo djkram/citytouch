@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # starts sercices
-echo "Runninf Citytouch Demo !!!"
+echo "Running Citytouch Demo !!!"
 
 # Pico
 service pico start
