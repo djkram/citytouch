@@ -14,4 +14,4 @@ source /etc/apache2/envvars
 [ ! -d ${APACHE_LOCK_DIR:-/var/lock/apache2} ] && mkdir -p ${APACHE_LOCK_DIR:-/var/lock/apache2} && chown ${APACHE_RUN_USER:-www-data} ${APACHE_LOCK_DIR:-/var/lock/apache2}
 
 echo "Citytouch running ;)"
-exec /usr/sbin/apache2 -DFOREGROUND >> /var/log/citytouch.log 2>&1
+exec /usr/sbin/apache2 -DFOREGROUND >> /var/log/apache2.log 2>&1

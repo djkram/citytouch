@@ -4,7 +4,7 @@
 case "$1" in
   start)
     echo "Starting pico"
-    /app/setup-env/pico-server &> /var/log/citytouch.log &
+    /app/setup-env/pico-server &> /var/log/pico.log &
     ;;
   stop)
     echo "Stopping pico"
