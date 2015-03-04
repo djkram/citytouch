@@ -1,3 +1,4 @@
+import os
 import pico
 import psycopg2
 import numpy as np
@@ -16,11 +17,15 @@ from sklearn.cluster import DBSCAN
 import uuid
 
 ROOT = '/app'
+DATABASE = os.getenv('BD_NAME_CITYTOUCH', 'citytouch')
+HOSTNAME = os.getenv('BD_HOST_CITYTOUCH', 'bdigitaldb.celqzuwfokoe.eu-west-1.rds.amazonaws.com')
+USER = os.getenv('BD_USER_CITYTOUCH', 'citytouch')
+PASSWORD = os.getenv('BD_PASSWORD_CITYTOUCH', '')
 
 # Session older than 24 hours will be deleted.
 SESSION_LIFESPAN = 60 * 60 * 24
 
-con = psycopg2.connect(database='citytouch', user='citytouch') 
+con = psycopg2.connect(database=DATABASE, host=HOSTNAME, user=USER, password=PASSWORD) 
 
 R = 6378137.0
 

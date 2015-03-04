@@ -177,24 +177,28 @@ def processFile(filename):
   
 if __name__ == "__main__":
   try:
-    opts, args = getopt.getopt(sys.argv[1:], "hf:d:t:u:", ["file=", "database=", "table=", "user="])
+    opts, args = getopt.getopt(sys.argv[1:], "f:h:d:t:u:p:", ["file=", "hostname=", "database=", "table=", "user=", "password="])
   except getopt.GetoptError:
-    print '%s -f file -d database -t table -u user' % (sys.argv[0])
+    print '%s -f file -h hostname -d database -t table -u user -p password' % (sys.argv[0])
     sys.exit(2)
   for opt, arg in opts:
     opt = opt.lower()
     if opt in ('-f', '-file'):
        FILE = arg
+    elif opt in ('-h', '-hostname'):
+       HOSTNAME = arg       
     elif opt in ('-d', '-database'):
        DATABASE = arg
     elif opt in ('-t', '-table'):
        TABLE = arg
     elif opt in ('-u', '-user'):
        USER = arg
-  if DATABASE == '' or TABLE == '' or USER == '':
-    print '%s -f file -d database -t table -u user' % (sys.argv[0])
+    elif opt in ('-p', '-password'):
+       PASSWORD = arg   
+  if DATABASE == '' or TABLE == '' or USER == '' or PASSWORD == '':
+    print '%s -f file -h hostname -d database -t table -u user -p password' % (sys.argv[0])
   else:
-    con = psycopg2.connect(database=DATABASE, user=USER)
+    con = psycopg2.connect(database=DATABASE, host=HOSTNAME, user=USER, password=PASSWORD)
     r = re.compile(r"(http://[^ ]+)")
     print '\nCreating table: %s' % TABLE
     create_table(TABLE)
