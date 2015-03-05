@@ -2,6 +2,7 @@
 
 # starts sercices
 echo "Running Citytouch Demo !!!"
+mkdir /var/eb_log
 
 # Pico
 service pico start
@@ -9,4 +10,4 @@ service pico start
 
 # Apache2
 echo "Starting apache2"
-exec /usr/sbin/apache2ctl -DFOREGROUND >> /var/log/apache2.log 2>&1
+exec /usr/sbin/apache2ctl -DFOREGROUND >> /var/eb_log/apache2.log 2>&1

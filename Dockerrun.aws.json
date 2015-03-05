@@ -1,12 +1,12 @@
 {
     "AWSEBDockerrunVersion": "1",
-    "Logging": "/tmp/citytouch-logs",
     "Image": {
-        "Name": "ubuntu:trusty"
+        "Name": "djkram/citytouch:latest"
     },
     "Ports": [
         { 
             "ContainerPort": "80"
         }
-    ]
+    ],
+    "Logging": "/var/eb_log"
 }
