@@ -50,4 +50,4 @@ EXPOSE 80
 
 RUN chmod 0755 setup-env/pico-server
 RUN chmod 0755 setup-env/start-citytouch.sh
-ENTRYPOINT ["/app/setup-env/start-citytouch.sh"]
+#ENTRYPOINT ["/app/setup-env/start-citytouch.sh"]

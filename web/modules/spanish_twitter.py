@@ -22,6 +22,9 @@ HOSTNAME = os.getenv('BD_HOST_CITYTOUCH', 'bdigitaldb.celqzuwfokoe.eu-west-1.rds
 USER = os.getenv('BD_USER_CITYTOUCH', 'citytouch')
 PASSWORD = os.getenv('BD_PASSWORD_CITYTOUCH', '')
 
+print('BD_PASSWORD_CITYTOUCH:')
+print(os.getenv('BD_PASSWORD_CITYTOUCH'))
+
 # Session older than 24 hours will be deleted.
 SESSION_LIFESPAN = 60 * 60 * 24
 

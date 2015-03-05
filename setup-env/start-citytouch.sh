@@ -4,8 +4,6 @@ if [[ ! -e /var/eb_log ]]; then
     mkdir /var/eb_log
 fi
 
-echo $BD_PASSWORD_CITYTOUCH 
-
 # starts sercices
 echo "Running Citytouch Demo !!!"
 
