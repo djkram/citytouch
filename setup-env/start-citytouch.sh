@@ -6,6 +6,7 @@ fi
 
 # starts sercices
 echo "Running Citytouch Demo !!!"
+echo $BD_PASSWORD_CITYTOUCH
 
 # Pico
 service pico start

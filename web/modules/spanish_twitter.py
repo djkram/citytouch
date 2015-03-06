@@ -24,7 +24,9 @@ PASSWORD = os.getenv('BD_PASSWORD_CITYTOUCH', '')
 
 print('BD_PASSWORD_CITYTOUCH:')
 print(os.getenv('BD_PASSWORD_CITYTOUCH'))
-
+print os.environ.get('BD_PASSWORD_CITYTOUCH')
+print os.environ['BD_PASSWORD_CITYTOUCH']
+  
 # Session older than 24 hours will be deleted.
 SESSION_LIFESPAN = 60 * 60 * 24
 
