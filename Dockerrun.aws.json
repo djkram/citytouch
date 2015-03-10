@@ -1,7 +1,8 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-        "Name": "djkram/citytouch:latest"
+        "Name": "djkram/citytouch:latest",
+        "Update": "true"
     },
     "Ports": [
         { 
