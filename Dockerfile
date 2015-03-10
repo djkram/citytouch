@@ -26,28 +26,3 @@ RUN cd /tmp && wget --quiet --no-check-certificate https://github.com/surfly/gev
 
 # Install Apache2
 RUN apt-get install -y apache2
-
-# Init Srcipts
-VOLUME ["/app"]
-ADD setup-env /app/setup-env
-
-WORKDIR /app
-COPY setup-env/pico /etc/init.d/pico
-RUN chmod +x /etc/init.d/pico
-RUN update-rc.d pico defaults
-
-# add web
-ADD web /var/www/html
-
-# Configure Apache2
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
-RUN echo "ProxyPass /pico/ http://localhost:8800/pico/ retry=5" > /etc/apache2/conf-available/proxy.conf
-RUN echo "ProxyPassReverse /pico/ http://localhost:8800/pico/" >> /etc/apache2/conf-available/proxy.conf
-RUN a2enconf proxy.conf
-RUN a2enmod proxy_http
-
-EXPOSE 80
-
-RUN chmod 0755 setup-env/pico-server
-RUN chmod 0755 setup-env/start-citytouch.sh
-ENTRYPOINT ["/app/setup-env/start-citytouch.sh"]
