@@ -1,4 +1,3 @@
-import os
 import pico
 import psycopg2
 import numpy as np
@@ -15,6 +14,7 @@ import tfidf
 from scipy.special import gammaln
 from sklearn.cluster import DBSCAN
 import uuid
+import os
 
 ROOT = '/app'
 DATABASE = os.getenv('BD_NAME_CITYTOUCH', 'citytouch')
@@ -25,7 +25,7 @@ PASSWORD = os.getenv('BD_PASSWORD_CITYTOUCH', '')
 print('BD_PASSWORD_CITYTOUCH:')
 print(os.getenv('BD_PASSWORD_CITYTOUCH'))
 print(os.environ.get('BD_PASSWORD_CITYTOUCH'))
-print(os.environ['BD_PASSWORD_CITYTOUCH'])
+print(os.environ['PARAM1'])
   
 # Session older than 24 hours will be deleted.
 SESSION_LIFESPAN = 60 * 60 * 24
